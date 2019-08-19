@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Remind Me</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheet.css">
+
+    <!-- <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script> -->
+    <script src=main.js></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"
+        integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Logo</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#"><span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Login In</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Sign Up</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Contact Me</a>
+                </li>
+                <!-- <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Dropdown
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+      </li> -->
+            </ul>
+        </div>
+    </nav>
+    <form>
+        <div class="form-group">
+            <div class="col-4">
+                <label for="exampleFormControlInput1">Title</label>
+                <!-- <input type="text" class="form-control" id="exampleFormControlInput1" placeholder=""> -->
+                <textarea class="form-control" id="exampleFormControlInput1" rows="1"></textarea>
+            </div>
+            <label for="exampleFormControlInput2"></label>
+            <!-- <input type="text" class="form-control" id="exampleFormControlInput1" placeholder=""> -->
+            <textarea class="form-control" id="exampleFormControlInput2" rows="5" placeholder="Remind me..."></textarea>
+        </div>
+        <div class="date-selection">
+            <div class="form-row">
+                <div class="col-2">
+                    <label for="Hour"></label>
+                    <input type="text" class="form-control" id="hr" placeholder="Hour">
+                </div>
+                <div class="col-2">
+                    <label for="Minutes"></label>
+                    <input type="text" class="form-control" id="min" placeholder="Minutes">
+                </div>
+                <div class="col-2">
+                    <label for="Seconds"></label>
+                    <input type="text" class="form-control" id="sec" placeholder="Seconds">
+                </div>
+                <div class="col-2">
+                    <label for="Month"></label>
+                    <input type="text" class="form-control" id="month" placeholder="Month">
+                </div>
+                <div class="col-2">
+                    <label for="Day"></label>
+                    <input type="text" class="form-control" id="day" placeholder="Day">
+                </div>
+                <div class="col-2">
+                    <label for="Year"></label>
+                    <input type="text" class="form-control" id="year" placeholder="Year">
+                </div>
+            </div>
+
+        </div>
+        <div class="col-auto">
+            <button type="button" class="btn btn-primary mb-2" onclick="addRmndr()">Submit</button>
+        </div>
+    </form>
+    <div class="timerAppear">
+
+    </div>
+    <div class="reminderList">
+
+    </div>
+
+    </div>
+</body>
+
+</html>
