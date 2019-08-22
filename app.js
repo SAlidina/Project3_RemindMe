@@ -2,8 +2,8 @@
 * Module dependencies.
 */
 var express = require('express')
-  , routes = require('./BackEnd/routes')
-  , user = require('./BackEnd/routes/user')
+  , routes = require('./routes')
+  , user = require('./routes/user')
   , http = require('http')
   , path = require('path');
 //var methodOverride = require('method-override');
@@ -15,6 +15,8 @@ var app = express();
 var mysql = require('mysql');
 var bodyParser = require("body-parser");
 var connection;
+
+
 if (process.env.JAWSDB_URL) {
   connection = mysql.createConnection(process.env.JAWSDB_URL);
 } else {
