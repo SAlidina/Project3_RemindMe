@@ -11,10 +11,12 @@
     <link rel="stylesheet" type="text/css" media="screen" href="stylesheet.css">
 
     <!-- <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script> -->
-    <script src=main.js></script>
+    <script src="moment.js"></script>
+    
     <script src="https://code.jquery.com/jquery-3.4.1.js"
         integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
 
+    <script src=main.js></script>
 </head>
 
 <body>
@@ -31,10 +33,10 @@
                     <a class="nav-link" href="#"><span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Login In</a>
+                    <a class="nav-link" href="index">Login In</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Sign Up</a>
+                    <a class="nav-link" href="signup">Sign Up</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">About</a>
@@ -70,28 +72,28 @@
         <div class="date-selection">
             <div class="form-row">
                 <div class="col-2">
-                    <label for="Hour"></label>
-                    <input type="text" class="form-control" id="hr" placeholder="Hour">
+                    <label for="Seconds"></label>
+                    <input type="text" class="form-control" id="sec" placeholder="Seconds">
                 </div>
                 <div class="col-2">
                     <label for="Minutes"></label>
                     <input type="text" class="form-control" id="min" placeholder="Minutes">
                 </div>
                 <div class="col-2">
-                    <label for="Seconds"></label>
-                    <input type="text" class="form-control" id="sec" placeholder="Seconds">
-                </div>
-                <div class="col-2">
-                    <label for="Month"></label>
-                    <input type="text" class="form-control" id="month" placeholder="Month">
+                    <label for="Hour"></label>
+                    <input type="text" class="form-control" id="hr" placeholder="Hours">
                 </div>
                 <div class="col-2">
                     <label for="Day"></label>
-                    <input type="text" class="form-control" id="day" placeholder="Day">
+                    <input type="text" class="form-control" id="day" placeholder="Days">
+                </div>
+                <div class="col-2">
+                    <label for="Month"></label>
+                    <input type="text" class="form-control" id="month" placeholder="Months">
                 </div>
                 <div class="col-2">
                     <label for="Year"></label>
-                    <input type="text" class="form-control" id="year" placeholder="Year">
+                    <input type="text" class="form-control" id="year" placeholder="Years">
                 </div>
             </div>
 
@@ -103,8 +105,7 @@
     <div class="timerAppear">
 
     </div>
-    <div class="reminderList">
-
+    <div class="row" id="reminderList">
     </div>
 
     </div>

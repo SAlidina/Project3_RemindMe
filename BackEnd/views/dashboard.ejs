@@ -1,0 +1,185 @@
+<%- include header %>
+<!-- Main component for a primary marketing message or call to action -->
+<div class="jumbotron">
+  <h1>Welcome</h1>
+  <p>Things to keep in mind...</p>
+</div>
+<form>
+  <div class="form-group">
+    <div class="col-4">
+      <label for="exampleFormControlInput1">Title</label>
+      <!-- <input type="text" class="form-control" id="exampleFormControlInput1" placeholder=""> -->
+      <textarea class="form-control" id="exampleFormControlInput1" rows="1"></textarea>
+    </div>
+    <label for="exampleFormControlInput2"></label>
+    <!-- <input type="text" class="form-control" id="exampleFormControlInput1" placeholder=""> -->
+    <textarea class="form-control" id="exampleFormControlInput2" rows="5" placeholder="Remind me..."></textarea>
+  </div>
+  <div class="date-selection">
+    <div class="form-row">
+      <div class="col-2">
+        <label for="Seconds"></label>
+        <input type="text" class="form-control" id="sec" placeholder="Seconds">
+      </div>
+      <div class="col-2">
+        <label for="Minutes"></label>
+        <input type="text" class="form-control" id="min" placeholder="Minutes">
+      </div>
+      <div class="col-2">
+        <label for="Hour"></label>
+        <input type="text" class="form-control" id="hr" placeholder="Hours">
+      </div>
+      <div class="col-2">
+        <label for="Day"></label>
+        <input type="text" class="form-control" id="day" placeholder="Days">
+      </div>
+      <div class="col-2">
+        <label for="Month"></label>
+        <input type="text" class="form-control" id="month" placeholder="Months">
+      </div>
+      <div class="col-2">
+        <label for="Year"></label>
+        <input type="text" class="form-control" id="year" placeholder="Years">
+      </div>
+    </div>
+
+  </div>
+  <div class="col-auto">
+    <button type="button" class="btn btn-primary mb-2" onclick="addRmndr()">Submit</button>
+  </div>
+</form>
+<div class="timerAppear">
+
+</div>
+<div class="row" id="reminderList">
+</div>
+
+</div>
+
+<script type="application/javascript">
+  var cardCount = 0;
+
+  $(document).ready(function startTimers() {
+    //Is there a logged in user?
+
+    //If so, get their cards, add them via the function.
+    $.ajax({
+        url: '/dashboard/get',
+        type: 'GET',
+        async: false,
+        cache: false,
+        timeout: 30000,
+        error: function(){
+          console.log("error");
+        },
+        success: function(data){
+          for(var i = 0; i < data.length; i++){
+            var timeUntil = data[i].time_until;
+            timeUntil = timeUntil - Date.now();
+            timeUntil = timeUntil / 1000;
+            makeCardFromDB(i, data[i].message, data[i].title, timeUntil)
+            cardCount++;
+          }
+          console.log("Success");
+        }
+    });
+
+    setInterval(function updateTimers() {
+      for (var id = 0; id < cardCount; id++) {
+        var timeUntil = document.getElementById(id).getAttribute("timeUntil");
+
+        if (timeUntil > 0) {
+          var years = Math.floor(timeUntil / (60 * 60 * 24 * 30 * 12));
+          var months = Math.floor((timeUntil % (60 * 60 * 24 * 30 * 12)) / (60 * 60 * 24 * 30));
+          var days = Math.floor((timeUntil % (60 * 60 * 24 * 30)) / (60 * 60 * 24));
+          var hours = Math.floor((timeUntil % (60 * 60 * 24)) / (60 * 60));
+          var minutes = Math.floor((timeUntil % (60 * 60)) / 60);
+          var seconds = Math.floor(timeUntil % 60);
+
+          countDownTimer = years + `y ` + months + `m ` + days + `d ` + hours + `h ` + minutes + `m ` + seconds + `s `;
+
+          timeUntil--;
+
+          document.getElementById(id).setAttribute("timeUntil", timeUntil);
+          document.getElementById(id).innerHTML = countDownTimer;
+
+        }
+        else {
+          document.getElementById(id).innerHTML = "EXPIRED";
+        }
+      }
+    }, 1000);
+  });
+
+  function addRmndr() {
+
+    var remndr = $("#exampleFormControlInput2").val().trim();
+
+    var cardTitle = $("#exampleFormControlInput1").val().trim()
+
+    addCardToDB(remndr, cardTitle);
+  };
+
+  function makeCardFromDB(id, remndr, cardTitle, timeUntil){
+    var timerCard = $(` <div class="card" style="width: 18rem;">
+                            <div class="card-body">
+                                <h5 class="card-title">` + cardTitle + `</h5>
+                                <h6 id="` + id + `" timeUntil="` + timeUntil + `" class="card-subtitle mb-2 text-muted"></h6>
+                                <p class="card-text">` + remndr + `</p>
+                            </div>
+                        </div>`);
+    $("#reminderList").append(timerCard);
+  }
+
+  function addCardToDB(remndr, cardTitle) {
+
+    var inputHr = $("#hr").val().trim();
+    var inputMin = $("#min").val().trim();
+    var inputSec = $("#sec").val().trim();
+    var inputMonth = $("#month").val().trim();
+    var inputDay = $("#day").val().trim();
+    var inputYear = $("#year").val().trim();
+
+    var timeUntil = parseInt(0);
+
+    if (!isNaN(inputYear) && inputYear != "") {
+      timeUntil += parseInt(inputYear * 60 * 60 * 24 * 30 * 12);
+    }
+    if (!isNaN(inputMonth) && inputMonth != "") {
+      timeUntil += parseInt(inputMonth * 60 * 60 * 24 * 30);
+    }
+    if (!isNaN(inputDay) && inputDay != "") {
+      timeUntil += parseInt(inputDay * 60 * 60 * 24);
+    }
+    if (!isNaN(inputHr) && inputHr != "") {
+      timeUntil += parseInt(inputHr * 60 * 60);
+    }
+    if (!isNaN(inputMin) && inputMin != "") {
+      timeUntil += parseInt(inputMin * 60);
+    }
+    if (!isNaN(inputSec) && inputSec != "") {
+      timeUntil += parseInt(inputSec);
+    }
+
+    timeUntil *= 1000;
+    
+    $.ajax({
+        url: '/dashboard/add',
+        type: 'POST',
+        async: false,
+        cache: false,
+        timeout: 30000,
+        data: { title: cardTitle, message: remndr, timeUntil: (Date.now() + timeUntil) },
+        error: function(){
+          console.log("error");
+        },
+        success: function(data){
+          console.log("Success");
+        }
+    });
+
+    document.location.reload(true);
+  }
+
+</script>
+<%- include footer %>
