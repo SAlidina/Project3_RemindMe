@@ -1,3 +1,11 @@
 .form-group, .date-selection, .card {
     margin: 20px
 }
+
+#navbar {
+    background-color: #d9edf7;
+}
+
+#jumbotron {
+    background-color: #FFF0A3;
+}
