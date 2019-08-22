@@ -11,12 +11,17 @@ var session = require('express-session');
 var app = express();
 var mysql = require('mysql');
 var bodyParser = require("body-parser");
-var connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: 'password',
-  database: 'test'
-});
+var connection;
+if (process.env.JAWSDB_URL) {
+  connection = mysql.createConnection(process.env.JAWSDB_URL);
+} else {
+  connection = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: 'password',
+    database: 'test'
+  });
+};
 
 connection.connect();
 
