@@ -4,50 +4,49 @@
   <h1>Welcome</h1>
   <p>Things to keep in mind...</p>
 </div>
-<form>
+<form class="container">
   <div class="form-group">
-    <div class="col-4">
-      <label for="exampleFormControlInput1">Title</label>
+    <div class="col-md">
+      <textarea class="form-control" id="exampleFormControlInput1" rows="1" placeholder="Title"></textarea>
+      <br>
       <!-- <input type="text" class="form-control" id="exampleFormControlInput1" placeholder=""> -->
-      <textarea class="form-control" id="exampleFormControlInput1" rows="1"></textarea>
+      <textarea class="form-control" id="exampleFormControlInput2" rows="5" placeholder="Remind me..."></textarea>
     </div>
-    <label for="exampleFormControlInput2"></label>
-    <!-- <input type="text" class="form-control" id="exampleFormControlInput1" placeholder=""> -->
-    <textarea class="form-control" id="exampleFormControlInput2" rows="5" placeholder="Remind me..."></textarea>
-  </div>
-  <div class="date-selection">
-    <div class="form-row">
-      <div class="col-2">
-        <label for="Seconds"></label>
-        <input type="text" class="form-control" id="sec" placeholder="Seconds">
-      </div>
-      <div class="col-2">
-        <label for="Minutes"></label>
-        <input type="text" class="form-control" id="min" placeholder="Minutes">
-      </div>
-      <div class="col-2">
-        <label for="Hour"></label>
-        <input type="text" class="form-control" id="hr" placeholder="Hours">
-      </div>
-      <div class="col-2">
-        <label for="Day"></label>
-        <input type="text" class="form-control" id="day" placeholder="Days">
-      </div>
-      <div class="col-2">
-        <label for="Month"></label>
-        <input type="text" class="form-control" id="month" placeholder="Months">
-      </div>
-      <div class="col-2">
-        <label for="Year"></label>
-        <input type="text" class="form-control" id="year" placeholder="Years">
-      </div>
+    <div class="date-selection">
+      <div class="form-row">
+        <div class="col-sm">
+          <label for="Seconds"></label>
+          <input type="text" class="form-control" id="sec" placeholder="Seconds">
+        </div>
+        <div class="col-sm">
+          <label for="Minutes"></label>
+          <input type="text" class="form-control" id="min" placeholder="Minutes">
+        </div>
+        <div class="col-sm">
+          <label for="Hour"></label>
+          <input type="text" class="form-control" id="hr" placeholder="Hours">
+        </div>
+        <div class="col-sm">
+          <label for="Day"></label>
+          <input type="text" class="form-control" id="day" placeholder="Days">
+        </div>
+        <div class="col-sm">
+          <label for="Month"></label>
+          <input type="text" class="form-control" id="month" placeholder="Months">
+        </div>
+        <div class="col-sm">
+          <label for="Year"></label>
+          <input type="text" class="form-control" id="year" placeholder="Years">
+        </div>
+        <div class="col-sm">
+      <button type="button" class="btn btn-primary mb-2" onclick="addRmndr()" style="margin-top: 7px">Submit</button>
     </div>
+      </div>
 
-  </div>
-  <div class="col-auto">
-    <button type="button" class="btn btn-primary mb-2" onclick="addRmndr()">Submit</button>
-  </div>
+    </div>
+    
 </form>
+<br>
 <div class="timerAppear">
 
 </div>
@@ -64,24 +63,24 @@
 
     //If so, get their cards, add them via the function.
     $.ajax({
-        url: '/dashboard/get',
-        type: 'GET',
-        async: false,
-        cache: false,
-        timeout: 30000,
-        error: function(){
-          console.log("error");
-        },
-        success: function(data){
-          for(var i = 0; i < data.length; i++){
-            var timeUntil = data[i].time_until;
-            timeUntil = timeUntil - Date.now();
-            timeUntil = timeUntil / 1000;
-            makeCardFromDB(i, data[i].message, data[i].title, timeUntil)
-            cardCount++;
-          }
-          console.log("Success");
+      url: '/dashboard/get',
+      type: 'GET',
+      async: false,
+      cache: false,
+      timeout: 30000,
+      error: function () {
+        console.log("error");
+      },
+      success: function (data) {
+        for (var i = 0; i < data.length; i++) {
+          var timeUntil = data[i].time_until;
+          timeUntil = timeUntil - Date.now();
+          timeUntil = timeUntil / 1000;
+          makeCardFromDB(i, data[i].message, data[i].title, timeUntil)
+          cardCount++;
         }
+        console.log("Success");
+      }
     });
 
     setInterval(function updateTimers() {
@@ -120,7 +119,7 @@
     addCardToDB(remndr, cardTitle);
   };
 
-  function makeCardFromDB(id, remndr, cardTitle, timeUntil){
+  function makeCardFromDB(id, remndr, cardTitle, timeUntil) {
     var timerCard = $(` <div class="card" style="width: 18rem;">
                             <div class="card-body">
                                 <h5 class="card-title">` + cardTitle + `</h5>
@@ -162,20 +161,20 @@
     }
 
     timeUntil *= 1000;
-    
+
     $.ajax({
-        url: '/dashboard/add',
-        type: 'POST',
-        async: false,
-        cache: false,
-        timeout: 30000,
-        data: { title: cardTitle, message: remndr, timeUntil: (Date.now() + timeUntil) },
-        error: function(){
-          console.log("error");
-        },
-        success: function(data){
-          console.log("Success");
-        }
+      url: '/dashboard/add',
+      type: 'POST',
+      async: false,
+      cache: false,
+      timeout: 30000,
+      data: { title: cardTitle, message: remndr, timeUntil: (Date.now() + timeUntil) },
+      error: function () {
+        console.log("error");
+      },
+      success: function (data) {
+        console.log("Success");
+      }
     });
 
     document.location.reload(true);

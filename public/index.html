@@ -12,7 +12,7 @@
 
     <!-- <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script> -->
     <script src="moment.js"></script>
-    
+
     <script src="https://code.jquery.com/jquery-3.4.1.js"
         integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
 
@@ -21,7 +21,7 @@
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Logo</a>
+        <a class="navbar-brand" href="#">{nudge}</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -58,16 +58,38 @@
             </ul>
         </div>
     </nav>
-    <form>
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h1 class="display-4">A {nudge} in the right direction...</h1>
+            <p class="lead">A reminder application for the small things we forget.</p>
+        </div>
+    </div>
+    <form class="container">
         <div class="form-group">
-            <div class="col-4">
-                <label for="exampleFormControlInput1">Title</label>
-                <!-- <input type="text" class="form-control" id="exampleFormControlInput1" placeholder=""> -->
-                <textarea class="form-control" id="exampleFormControlInput1" rows="1"></textarea>
+            <div class="row">
+                <div class="col" style="margin-top: -30px">
+                    <div class="card">
+                        <div class="card-header">
+                            Make your own reminder
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Jot down your message</h5>
+                            <p class="card-text">Input how long from now, you want to be reminded. Be sure to make an account to save your reminders.
+                            </p>
+                            <a href="#" class="btn btn-primary">Sign Up Today</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md">
+                    <textarea class="form-control" id="exampleFormControlInput1" rows="1"
+                        placeholder="Title"></textarea>
+                        <br>
+                    <!-- <input type="text" class="form-control" id="exampleFormControlInput1" placeholder=""> -->
+                    <textarea class="form-control" id="exampleFormControlInput2" rows="5"
+                        placeholder="Remind me..."></textarea>
+                </div>
             </div>
-            <label for="exampleFormControlInput2"></label>
-            <!-- <input type="text" class="form-control" id="exampleFormControlInput1" placeholder=""> -->
-            <textarea class="form-control" id="exampleFormControlInput2" rows="5" placeholder="Remind me..."></textarea>
+
         </div>
         <div class="date-selection">
             <div class="form-row">
